@@ -9,7 +9,7 @@ body{
 }
 
 h1{
-    font-size: 4rem;
+    font-size: 4vmax;
     color: rgb(10, 10, 10);
     position: absolute;
     top: 40%;
@@ -21,6 +21,7 @@ h1{
     width:140vmax; 
     height:140vmax;
     position: absolute;
+    transition: transform 400ms ease;
 }
 
 .tile{
@@ -45,6 +46,7 @@ h1{
     border-radius: inherit; /* inherit the border-radius from the parent */
     opacity: 0;
     transition: opacity 800ms ease, transform 800ms ease;
+    cursor: pointer;
 }
 
 /* Randomly position the tiles */
@@ -52,24 +54,24 @@ h1{
     width: 20%;
     height: 14%;
     background-color: #03012C;
-    top: 5%;
+    top: 8%;
     left: 5%;
 }
 
 .tile:nth-child(2){
-    width: 30%;
-    height: 18%;
+    width: 13%;
+    height: 21%;
     background-color: #D3BCC0;
-    top: 28%;
-    left: 40%;
+    top: 33%;
+    left: 66%;
 }
 
 .tile:nth-child(3){
     width: 15%;
     height: 20%;
     background-color: #FC5130;
-    top: 28%;
-    left: 12%;
+    top: 29%;
+    left: 8%;
 }
 
 .tile:nth-child(4){
@@ -81,7 +83,7 @@ h1{
 }
 
 .tile:nth-child(5){
-    width: 30%;
+    width: 23%;
     height: 14%;
     background-color: #432E36;
     top: 7%;
@@ -89,20 +91,29 @@ h1{
 }
 
 .tile:nth-child(6){
-    width: 20%;
+    width: 22%;
     height: 14%;
     background-color: rgb(125, 104, 158);
-    top: 5%;
-    left: 40%;
+    top: 9%;
+    left: 43%;
 }
 
 .tile:nth-child(7){
     width: 10%;
-    height: 30%;
+    height: 10%;
     background-color: #7EE081;
     top: 0;
     left: 29%;
 }
+
+.tile:nth-child(8){
+    width: 19%;
+    height: 18%;
+    background-color: #462255;
+    top: 26%;
+    left: 30%;
+}
+
 
 .source{
   backdrop-filter: blur(3px);
@@ -127,4 +138,56 @@ h1{
 a{
     color: black;
     text-decoration: none;
+}
+
+
+/* if data attribute is false */
+.tile[data-show="false"] {
+    transform: scale(0) !important;
+}
+
+.tile[data-show="false"] > img{
+    opacity: 1;
+}
+/* animation to zoom in all elements */
+.tile[data-show="true"] {
+    animation: zoomIn 20ms ease !important;
+}
+
+zoomIn {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(0.4);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.tile[data-hide="true"] {
+    animation: zoomOut 800ms ease !important;
+}
+
+.tile[data-hide="true"] > img{
+    opacity: 0;
+}
+
+zoomOut {
+    0% {
+        transform: scale(1);
+        transform: translateX(0);
+
+    }
+    50% {
+        transform: scale(0.4);
+        transform: translateX(10px);
+
+    }
+    100% {
+        transform: scale(0);
+        transform: translateX(0);
+    }
 }
